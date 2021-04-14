@@ -322,23 +322,25 @@ def processAll(imu, emg):
     porcentaje_tiempo = len(tiempo_sel[senal > rms_ref*0.3])/len(tiempo_sel)*100
     tiempo_sobre30 = sum(tiempo_exp(tiempo_sel[senal > rms_ref*0.3]))
 
+    ret = {}
     # variables imu
-    print('hombro_forzado', hombro_forzado)
-    print('hombro_mantenido', hombro_mantenido)
-    print('codo_forzado', codo_forzado)
-    print('codo_mantenido', codo_mantenido)
-    print('muneca_forzado', muneca_forzado)
-    print('muneca_mantenido', muneca_mantenido)
+    ret['hombro_forzado'] = hombro_forzado
+    ret['hombro_mantenido'] = hombro_mantenido
+    ret['codo_forzado'] = codo_forzado
+    ret['codo_mantenido'] = codo_mantenido
+    ret['muneca_forzado'] = muneca_forzado
+    ret['muneca_mantenido'] = muneca_mantenido
 
     # variables emg
-    print('duracion_sel', duracion_sel)
-    print('mean_sel', mean_sel)
-    print('rms_sel', rms_sel)
-    print('maxV_sel', maxV_sel)
-    print('mean_cvm', mean_cvm)
-    print('rms_cvm', rms_cvm)
-    print('porcentaje_tiempo', porcentaje_tiempo)
-    print('tiempo_sobre30', tiempo_sobre30)
+    ret['duracion_sel'] = duracion_sel
+    ret['mean_sel'] = mean_sel
+    ret['rms_sel'] = rms_sel
+    ret['maxV_sel'] = maxV_sel
+    ret['mean_cvm'] = mean_cvm
+    ret['rms_cvm'] = rms_cvm
+    ret['porcentaje_tiempo'] = porcentaje_tiempo
+    ret['tiempo_sobre30'] = tiempo_sobre30
 
-processAll(pd.read_csv('imu.csv'), pd.read_csv('emg.csv'))
+    return ret
+
 
