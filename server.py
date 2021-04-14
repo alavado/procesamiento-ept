@@ -12,6 +12,12 @@ def hello_world():
 def proc():
   imu = pd.read_csv(request.files['imu'])
   emg = pd.read_csv(request.files['emg'])
-  return jsonify(processAll(imu, emg))
+  ti = request.form['ti']
+  tf = request.form['tf']
+  c = request.form['canal']
+  tir = request.form['tir']
+  tfr = request.form['tfr']
+  cr = request.form['canalr']
+  return jsonify(processAll(imu, emg, ti, tf, c, tir, tfr, cr))
 
 app.run()

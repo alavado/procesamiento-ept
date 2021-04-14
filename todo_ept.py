@@ -16,7 +16,7 @@ import sys
 
 import math
 
-def processAll(imu, emg):
+def processAll(imu, emg, ti, tf, c, tir, tfr, cr):
 
     def rmsValue(array):
         array = np.array(array)
@@ -259,7 +259,7 @@ def processAll(imu, emg):
 
     #%%
 
-    gain = 1 + 49400/47;
+    gain = 1 + 49400/47
     emgs = (((emg.iloc[:,1:5] * 3.3) / 1023) / gain)
     emgs = emgs - np.tile(np.mean(emgs),(len(emgs),1))
 
@@ -284,9 +284,9 @@ def processAll(imu, emg):
     emgs['t'] = emg.tiempo2
     #%%
     #ventana referencia (selector de ventana y canal en app web)
-    inicio_ref = 5
-    final_ref = 10
-    canal = 1
+    inicio_ref = float(tir)
+    final_ref = float(tfr)
+    canal = int(cr)
 
     senal = emgs.iloc[:,canal]
     time = emgs.t
@@ -299,9 +299,9 @@ def processAll(imu, emg):
     maxV = np.max(ventana_ref)
 
     #%% ventana a analizar
-    inicio_sel = 30
-    final_sel = 40
-    canal = 1
+    inicio_sel = float(ti)
+    final_sel = float(tf)
+    canal = int(c)
 
     senal = emgs.iloc[:,canal]
     time = emgs.t
