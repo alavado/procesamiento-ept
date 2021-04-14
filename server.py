@@ -2,13 +2,16 @@ from flask import Flask, request, jsonify
 import sys
 from todo_ept import processAll
 import pandas as pd
+from flask_cors import CORS, cross_origin
 app = Flask(__name__)
+cors = CORS(app)
 
 @app.route('/')
 def hello_world():
   return 'Hello, World!'
 
 @app.route('/proc', methods=['POST'])
+@cross_origin()
 def proc():
   imu = pd.read_csv(request.files['imu'])
   emg = pd.read_csv(request.files['emg'])
