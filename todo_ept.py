@@ -342,5 +342,3 @@ def processAll(imu, emg):
 
 processAll(pd.read_csv('imu.csv'), pd.read_csv('emg.csv'))
 
-
-
